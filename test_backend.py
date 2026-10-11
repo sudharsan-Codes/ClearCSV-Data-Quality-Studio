@@ -142,3 +142,12 @@ def test_fill_zero_strategy():
     _, frame = cleaned_frame(response)
     assert frame["Age"].isna().sum() == 0
     assert frame.loc[1, "Age"] == 0
+
+
+def test_malformed_csv_is_rejected():
+    response = post_csv(
+        "malformed.csv",
+        b"Name,Age\\nArun,22,unexpected-column\\n",
+    )
+    assert response.status_code == 400
+    assert "Could not parse CSV" in response.json()["detail"]
