@@ -15,7 +15,16 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-DEFAULT_API_URL = os.getenv("BACKEND_API_URL", "https://clearcsv-api.onrender.com").strip().rstrip("/")
+try:
+    STREAMLIT_SECRET_API_URL = str(st.secrets.get("BACKEND_API_URL", "")).strip()
+except Exception:
+    STREAMLIT_SECRET_API_URL = ""
+
+DEFAULT_API_URL = (
+    STREAMLIT_SECRET_API_URL
+    or os.getenv("BACKEND_API_URL", "")
+    or "https://clearcsv-api.onrender.com"
+).strip().rstrip("/")
 API_URL = st.sidebar.text_input("Backend API URL", value=DEFAULT_API_URL).strip().rstrip("/")
 
 st.markdown("""
