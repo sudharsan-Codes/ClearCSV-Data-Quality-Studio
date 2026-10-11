@@ -138,7 +138,7 @@ The test suite covers:
 - Health endpoint.
 - Standard cleaning and smart missing-value imputation.
 - Duplicate removal.
-- Rejection of non-CSV extensions and zero-byte files.
+- Rejection of non-CSV extensions, zero-byte files and malformed CSV content.
 - Header-only CSV input.
 - Safe conversion of numeric-looking columns.
 - Whitespace trimming before duplicate detection.
