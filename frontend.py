@@ -1,5 +1,6 @@
 import io
 import json
+import os
 from datetime import datetime
 
 import pandas as pd
@@ -14,7 +15,8 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-API_URL = st.sidebar.text_input("Backend API URL", "http://127.0.0.1:8000").rstrip("/")
+DEFAULT_API_URL = os.getenv("BACKEND_API_URL", "https://clearcsv-api.onrender.com").strip().rstrip("/")
+API_URL = st.sidebar.text_input("Backend API URL", value=DEFAULT_API_URL).strip().rstrip("/")
 
 st.markdown("""
 <style>
